@@ -11,6 +11,9 @@ import os
 from .utils import ensure_dir
 import os
 
+import pytesseract
+from PIL import Image
+
 TESSERACT_CMD = os.getenv("TESSERACT_CMD", "").strip()
 if TESSERACT_CMD:
     pytesseract.pytesseract.tesseract_cmd = TESSERACT_CMD
@@ -99,3 +102,15 @@ def extract_charts_as_data(pdf_path: str, images_dir: str) -> Tuple[List[pd.Data
         if df is not None and not df.empty:
             dfs.append(df)
     return dfs, imgs
+
+def ocr_extract_text_from_images(image_paths):
+    """Extracts text from chart images using OCR (pytesseract)."""
+    ocr_results = []
+    for img_path in image_paths:
+        try:
+            img = Image.open(img_path)
+            text = pytesseract.image_to_string(img)
+            ocr_results.append({"image": img_path, "text": text})
+        except Exception as e:
+            print(f"⚠️ OCR failed for {img_path}: {e}")
+    return ocr_results

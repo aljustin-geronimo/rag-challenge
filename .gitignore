@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+
+# Virtualenv
+.venv/
+venv/
+ENV/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Local config/secrets
+.env
+*.secret
+*.key
+
+# Outputs / caches
+outputs/
+!outputs/.gitkeep
+
+# Data inputs
+data/
+!data/.gitkeep
+
+# Optional: OS / editor
+.vscode/
+.idea/
